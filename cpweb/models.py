@@ -70,7 +70,7 @@ class CPTransform(models.Model):
     active = models.BooleanField(default=False)
 
     domain = models.CharField(max_length=32, blank=True)
-    agency = models.CharField(max_length=32, blank=True)
+    agency = models.CharField(max_length=64, blank=True)
     reg = models.CharField(max_length=32, blank=True)
     model = models.CharField(max_length=32, blank=True)
     hex = models.CharField(max_length=32, blank=True)
