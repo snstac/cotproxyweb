@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-!^f6gcub^b7dy979509djug=7%9d+^3x49b)o84n(y5d&94%*f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['172.17.2.100', '127.0.0.1', 'rorqual.local', 'localhost']
+ALLOWED_HOSTS = ['172.17.2.100', '127.0.0.1', 'rorqual.local', 'localhost', '172.17.2.135']
 
 
 # Application definition
@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'cotproxyweb.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': "/".join([BASE_DIR, 'db.sqlite3']),
     }
 }
 
