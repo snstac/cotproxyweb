@@ -26,16 +26,20 @@ class IconAdmin(admin.ModelAdmin):
 
 @admin.register(IconSet)
 class IconSetAdmin(admin.ModelAdmin):
-    search_fields = ['uid']
+    search_fields = ['uuid', 'name']
 
 
 @admin.register(CPTransform)
 class CPTransformAdmin(admin.ModelAdmin):
-    search_fields = ['callsign']
+    search_fields = ['callsign', 'cot_uid__uid']
     autocomplete_fields = ['cot_uid']
-    list_display = ['callsign', 'view_cot_uid']
+    list_display = ['show_callsign', 'view_cot_uid']
     list_filter = ('cot_uid__uid',)
 
+    @admin.display(empty_value="-None-", description='Callsign')
+    def show_callsign(self, obj):
+         return obj.callsign or "-None-"
+    
     def view_cot_uid(self, obj):
         url = (
             reverse('admin:cpweb_cotobject_changelist')

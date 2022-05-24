@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import COTObject, CPTransform
+from .models import COTObject, CPTransform, Icon, IconSet
 
 
 class COTObjectSerializer(serializers.HyperlinkedModelSerializer):
@@ -13,4 +13,19 @@ class CPTransformSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CPTransform
-        fields = ('callsign', 'cot_uid', 'cot_type', 'icon', 'active')
+        fields = ('callsign', 'cot_uid', 'cot_type', 'icon', 'active', 'domain', 'agency', 'reg', 'model', 'hex')
+
+
+
+class IconSetSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = IconSet
+        fields = ('uuid', 'name')
+        
+
+class IconSerializer(serializers.HyperlinkedModelSerializer):
+    iconset = serializers.PrimaryKeyRelatedField(allow_null=True, queryset=IconSet.objects.all(), required=False)
+    class Meta:
+        model = Icon
+        fields = ('name', 'iconset')
+

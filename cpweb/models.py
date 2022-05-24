@@ -4,7 +4,7 @@ import uuid
 
 class COTObject(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    uid = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    uid = models.CharField(max_length=128, primary_key=True, default=uuid.uuid4)
 
     class Meta:
         ordering = ['uid']
@@ -28,7 +28,7 @@ class IconSet(models.Model):
         verbose_name_plural = 'Icon Sets'
 
     def __str__(self):
-        return self.defaultGroup
+        return self.defaultGroup or self.name
 
 
 class Icon(models.Model):
@@ -39,8 +39,8 @@ class Icon(models.Model):
         null=True,
         blank=True
     )
-    name = models.CharField(max_length=128)
-    type2525b = models.CharField(max_length=32)
+    name = models.CharField(primary_key=True, max_length=128)
+    type2525b = models.CharField(max_length=32, blank=True)
 
     class Meta:
         ordering = ['name', 'type2525b']
@@ -65,9 +65,10 @@ class CPTransform(models.Model):
         null=True,
         blank=True
     )
-    callsign = models.CharField(max_length=32, blank=True, unique=True)
+    callsign = models.CharField(max_length=32, blank=True)
     cot_type = models.CharField(max_length=32, blank=True)
     active = models.BooleanField(default=False)
+
     domain = models.CharField(max_length=32, blank=True)
     agency = models.CharField(max_length=32, blank=True)
     reg = models.CharField(max_length=32, blank=True)
@@ -75,7 +76,7 @@ class CPTransform(models.Model):
     hex = models.CharField(max_length=32, blank=True)
 
     class Meta:
-        ordering = ['callsign']
+        ordering = ['callsign', 'cot_uid']
         verbose_name = 'Transform'
         verbose_name_plural = 'Transforms'
 

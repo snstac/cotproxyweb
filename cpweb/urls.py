@@ -10,6 +10,8 @@ from . import views
 router = routers.DefaultRouter()
 router.register(r'co', views.COTObjectViewSet)
 router.register(r'tf', views.CPTransformViewSet)
+router.register(r'icon', views.IconViewSet)
+router.register(r'iconSet', views.IconSetViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
