@@ -5,6 +5,7 @@ import uuid
 class COTObject(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     uid = models.CharField(max_length=128, primary_key=True, default=uuid.uuid4)
+    n_number = models.CharField(max_length=16, blank=True)
 
     class Meta:
         ordering = ['uid']
@@ -12,7 +13,10 @@ class COTObject(models.Model):
         verbose_name_plural = 'COT Objects'
 
     def __str__(self):
-        return self.uid
+        _str = self.uid
+        if self.n_number:
+            _str = f"{self.uid} ({self.n_number})"
+        return _str
 
 
 class IconSet(models.Model):
@@ -74,6 +78,7 @@ class CPTransform(models.Model):
     reg = models.CharField(max_length=32, blank=True)
     model = models.CharField(max_length=32, blank=True)
     hex = models.CharField(max_length=32, blank=True)
+    remarks = models.CharField(max_length=256, blank=True)
 
     class Meta:
         ordering = ['callsign', 'cot_uid']

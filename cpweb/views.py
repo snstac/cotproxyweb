@@ -16,6 +16,16 @@ class COTObjectViewSet(viewsets.ModelViewSet):
     lookup_value_regex = '[^/]+'
 
 
+class COTObjectList(generics.ListCreateAPIView):
+    queryset = COTObject.objects.all()
+    serializer_class = COTObjectSerializer
+
+
+class COTObjectDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = COTObject.objects.all()
+    serializer_class = COTObjectSerializer
+
+
 class CPTransformViewSet(viewsets.ModelViewSet): # mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     queryset = CPTransform.objects.all()
     serializer_class = CPTransformSerializer
@@ -28,6 +38,7 @@ class IconSetViewSet(viewsets.ModelViewSet):
     serializer_class = IconSetSerializer
     lookup_field = 'uuid'
     lookup_value_regex = '[^/]+'
+
 
 class IconViewSet(viewsets.ModelViewSet):
     queryset = Icon.objects.all()

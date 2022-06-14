@@ -16,8 +16,10 @@ admin.site.index_title = 'Sensors & Signals'
 
 @admin.register(COTObject)
 class COTObjectAdmin(admin.ModelAdmin):
-    search_fields = ['uid']
-
+    search_fields = ['uid', 'n_number']
+    # list_display = ['uid', 'n_number']
+    list_filter = ()
+    list_per_page = 20
 
 @admin.register(Icon)
 class IconAdmin(admin.ModelAdmin):
@@ -34,7 +36,9 @@ class CPTransformAdmin(admin.ModelAdmin):
     search_fields = ['callsign', 'cot_uid__uid']
     autocomplete_fields = ['cot_uid']
     list_display = ['show_callsign', 'view_cot_uid']
-    list_filter = ('cot_uid__uid',)
+    # list_filter = ('cot_uid__uid',)
+    list_filter = ()
+    list_per_page = 20
 
     @admin.display(empty_value="-None-", description='Callsign')
     def show_callsign(self, obj):

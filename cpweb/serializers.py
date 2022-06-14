@@ -5,7 +5,7 @@ from .models import COTObject, CPTransform, Icon, IconSet
 class COTObjectSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = COTObject
-        fields = ('uid',)
+        fields = ('uid', 'n_number')
 
 
 class CPTransformSerializer(serializers.ModelSerializer):
