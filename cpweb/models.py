@@ -81,7 +81,7 @@ class CPTransform(models.Model):
     remarks = models.CharField(max_length=256, blank=True)
 
     class Meta:
-        ordering = ['callsign', 'cot_uid']
+        ordering = ['callsign', 'cot_uid',]
         verbose_name = 'Transform'
         verbose_name_plural = 'Transforms'
 
