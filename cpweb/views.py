@@ -16,6 +16,9 @@ class COTObjectViewSet(viewsets.ModelViewSet):
     lookup_value_regex = '[^/]+'
 
 
+
+
+
 class COTObjectList(generics.ListCreateAPIView):
     queryset = COTObject.objects.all()
     serializer_class = COTObjectSerializer
@@ -24,20 +27,28 @@ class COTObjectList(generics.ListCreateAPIView):
 class COTObjectDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = COTObject.objects.all()
     serializer_class = COTObjectSerializer
+    lookup_field = 'cot_uid'
+    lookup_value_regex = '[^/]+'
+
+
+
 
 
 class CPTransformList(generics.ListCreateAPIView):
-    queryset = COTObject.objects.all()
-    serializer_class = COTObjectSerializer
+    queryset = CPTransform.objects.all()
+    serializer_class = CPTransformSerializer
     lookup_field = 'cot_uid'
     lookup_value_regex = '[^/]+'
 
 
 class CPTransformDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = COTObject.objects.all()
-    serializer_class = COTObjectSerializer
-    lookup_field = 'uid'
+    queryset = CPTransform.objects.all()
+    serializer_class = CPTransformSerializer
+    lookup_field = 'cot_uid'
     lookup_value_regex = '[^/]+'
+
+
+
 
 
 class CPTransformViewSet(viewsets.ModelViewSet): # mixins.RetrieveModelMixin, viewsets.GenericViewSet):
