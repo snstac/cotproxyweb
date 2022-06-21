@@ -29,14 +29,14 @@ class COTObjectDetail(generics.RetrieveUpdateDestroyAPIView):
 class CPTransformList(generics.ListCreateAPIView):
     queryset = COTObject.objects.all()
     serializer_class = COTObjectSerializer
-    lookup_field = 'cot_uid__uid'
+    lookup_field = 'cot_uid'
     lookup_value_regex = '[^/]+'
 
 
 class CPTransformDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = COTObject.objects.all()
     serializer_class = COTObjectSerializer
-    # lookup_field = 'cot_uid__uid'
+    lookup_field = 'cot_uid'
     lookup_value_regex = '[^/]+'
 
 
