@@ -28,6 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['172.17.2.100', '127.0.0.1', 'rorqual.local', 'localhost', '172.17.2.135', '5fadca038be6b80f99a0d038dc79aa8b.balena-devices.com']
 
+CSRF_TRUSTED_ORIGINS = ['https://5fadca038be6b80f99a0d038dc79aa8b.balena-devices.com']
+
 
 # Application definition
 
