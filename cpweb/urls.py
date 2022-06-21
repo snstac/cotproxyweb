@@ -16,10 +16,10 @@ router.register(r'icon', views.IconViewSet)
 router.register(r'iconSet', views.IconSetViewSet)
 
 urlpatterns = [
-    path("co/", views.COTObjectList.as_view()),
-    path("co/<pk>", views.COTObjectDetail.as_view()),
+    path("co/<uid>", views.COTObjectDetail.as_view()),
+    path("tf/<uid>", views.CPTransformDetail.as_view()),
     path("tf/", views.CPTransformList.as_view()),
-    path("tf/<pk>", views.CPTransformDetail.as_view()),
+    path("co/", views.COTObjectList.as_view()),
 #    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 

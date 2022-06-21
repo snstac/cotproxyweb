@@ -36,14 +36,14 @@ class CPTransformList(generics.ListCreateAPIView):
 class CPTransformDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = COTObject.objects.all()
     serializer_class = COTObjectSerializer
-    lookup_field = 'cot_uid'
+    lookup_field = 'uid'
     lookup_value_regex = '[^/]+'
 
 
 class CPTransformViewSet(viewsets.ModelViewSet): # mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     queryset = CPTransform.objects.all()
     serializer_class = CPTransformSerializer
-    lookup_field = 'cot_uid__uid'
+    # lookup_field = 'cot_uid__uid'
     lookup_value_regex = '[^/]+'
 
 
