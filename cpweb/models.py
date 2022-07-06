@@ -55,6 +55,21 @@ class Icon(models.Model):
         return self.name
 
 
+class Video(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    description = models.CharField(max_length=32, blank=True)
+    url = models.CharField(max_length=256, blank=True)
+    
+    class Meta:
+        ordering = ['description', ]
+        verbose_name = 'Video Link'
+        verbose_name_plural = 'Video Links'
+
+    def __str__(self):
+        return self.description
+
+
 class CPTransform(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     cot_uid = models.ForeignKey(
@@ -71,6 +86,11 @@ class CPTransform(models.Model):
     )
     callsign = models.CharField(max_length=32, blank=True)
     cot_type = models.CharField(max_length=32, blank=True)
+    video = models.ForeignKey(Video,
+        on_delete=models.DO_NOTHING,
+        null=True,
+        blank=True
+    )
     active = models.BooleanField(default=False)
 
     domain = models.CharField(max_length=32, blank=True)

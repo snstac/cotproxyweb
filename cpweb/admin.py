@@ -7,7 +7,7 @@ from django.utils.html import format_html
 
 # Register your models here.
 
-from .models import CPTransform, COTObject, Icon, IconSet
+from .models import CPTransform, COTObject, Icon, IconSet, Video
 
 
 admin.site.site_header = 'COT Proxy Web'
@@ -29,6 +29,11 @@ class IconAdmin(admin.ModelAdmin):
 @admin.register(IconSet)
 class IconSetAdmin(admin.ModelAdmin):
     search_fields = ['uuid', 'name']
+
+
+@admin.register(Video)
+class VideoAdmin(admin.ModelAdmin):
+    search_fields = ['description']
 
 
 @admin.register(CPTransform)
