@@ -63,11 +63,10 @@ These instructions will create, enable and start a service on Linux.
 
     $ sudo wget --output-document=/etc/systemd/system/cotproxyweb.service https://raw.githubusercontent.com/ampledata/cotproxyweb/main/cotproxyweb.service
 
-2. Edit the COTProxyWeb service and change ``CHANGEME`` to the path to the directory where you downloaded cotproxyweb::
+2. Edit the COTProxyWeb service and change ``CHANGEME`` to the path to the directory where you downloaded cotproxyweb. 
+(e.g. If you downloaded cotproxyweb to /home/pi/cotproxyweb, CHANGEME should be changed to /home/pi/cotproxyweb)::
 
     $ sudo nano /etc/systemd/system/cotproxyweb.service
-
-(e.g. If you downloaded cotproxyweb to /home/pi/cotproxyweb, CHANGEME should be changed to /home/pi/cotproxyweb)
 
 3. Edit COTProxyWeb settings.py and append your systems IP address to the ALLOWED_HOSTS list (that is, add the IP of 
 the system where you're running COTProxyWeb)::
