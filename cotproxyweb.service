@@ -1,0 +1,12 @@
+    [Unit]
+    Description=COTProxyWeb Service
+    After=multi-user.target
+
+    [Service]
+    WorkingDirectory=CHANGEME
+    ExecStart=python3 manage.py runserver 0:10415
+    Restart=always
+    RestartSec=5
+
+    [Install]
+    WantedBy=multi-user.target
