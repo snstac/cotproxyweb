@@ -60,7 +60,7 @@ CentOS, Debian, Ubuntu, RaspberryOS, Raspbian
 These instructions will create, enable and start a service on Linux.
 
 1. Download the example cotproxy systemd service definition::
-
+    
     $ sudo wget --output-document=/etc/systemd/system/cotproxyweb.service https://raw.githubusercontent.com/ampledata/cotproxyweb/main/cotproxyweb.service
 
 2. Edit the COTProxyWeb service and change ``CHANGEME`` to the path to the directory where you downloaded cotproxyweb. 
@@ -68,9 +68,9 @@ These instructions will create, enable and start a service on Linux.
 
     $ sudo nano /etc/systemd/system/cotproxyweb.service
 
-3. Edit COTProxyWeb settings.py and append your systems IP address to the ALLOWED_HOSTS list (that is, add the IP of 
-the system where you're running COTProxyWeb)::
-
+3. Edit COTProxyWeb's settings.py and append the IP of the system where you're running COTProxyWeb to the ``HOSTS_ALLOWED`` 
+list::
+    
     $ nano cotproxyweb/settings.py
 
 4. Enable cotproxyweb systemd service::
