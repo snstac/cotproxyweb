@@ -2,6 +2,10 @@
 COTProxyWeb
 ***********
 
+.. image:: https://raw.githubusercontent.com/ampledata/cotproxy/main/docs/youtube.png
+    :alt: YouTube: Getting started with COTProxy
+    :target: https://www.youtube.com/watch?v=ltVxh1uQ_EQ
+
 COTProxy Web Administration
 ###########################
 
@@ -9,24 +13,21 @@ COTProxyWeb is a web-baesd front-end for the `COTProxy <https://github.com/ample
 COTProxyWeb supports creation, replacement, updating and deletion (CRUD) of COTproxy 
 Objects & Transforms. 
 
-`YouTube: Getting started with COTProxy <https://www.youtube.com/watch?v=ltVxh1uQ_EQ>`_.
-
-Concept:
+Concept of Operations CONOPS:
 
 .. image:: https://raw.githubusercontent.com/ampledata/cotproxy/main/docs/cotproxy-concept.png
-   :alt: COTProxy concept diagram.
+   :alt: COTProxyWeb Concept of Operations CONOPS
    :target: https://raw.githubusercontent.com/ampledata/cotproxy/main/docs/cotproxy-concept.png
 
 
-Support Development
-===================
+Support This Project
+====================
 
-**Tech Support**: Email support@undef.net or Signal/WhatsApp: +1-310-621-9598
+**Help**: Email takhelp@undef.net or Signal/WhatsApp: +1-310-621-9598
 
-This tool has been developed for the Disaster Response, Public Safety and
-Frontline Healthcare community. This software is currently provided at no-cost
-to users. Any contribution you can make to further this project's development
-efforts is greatly appreciated.
+This project has been developed for the Disaster Response, Public Safety and
+Frontline Healthcare community. All contributions further project development and 
+ensure ongoing support.
 
 .. image:: https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png
     :target: https://www.buymeacoffee.com/ampledata
@@ -51,37 +52,37 @@ COTProxyWeb should be installed from source::
 Running
 =======
 
-COTProxyWeb should be started as a background sevice (daemon). Most modern systems 
-use systemd.
+COTProxyWeb should be started as a background sevice ('run forever', daemon, etc). 
+Most modern Linux-based operating systems use the `systemd <https://systemd.io/>`_ 
+System and Service Manager.
 
+CentOS, Debian, Ubuntu, RaspberryOS, Raspbian
+---------------------------------------------
 
-Debian, Ubuntu, RaspberryOS, Raspbian
--------------------------------------
+These instructions will create, enable and start a service on Linux.
 
-1. Copy the following code block to ``/etc/systemd/system/cotproxyweb.service``::
+1. Download the example cotproxy systemd service definition::
 
-    [cotproxy]
-    Description=COTProxyWeb Service
-    After=multi-user.target
-    [Service]
-    WorkingDirectory=CHANGEME: PATH TO COTPROXYWEB SOURCE
-    ExecStart=python3 manage.py runserver 0:10415
-    Restart=always
-    RestartSec=5
-    [Install]
-    WantedBy=multi-user.target
+    $ sudo wget --output-document=/etc/systemd/system/cotproxyweb.service https://raw.githubusercontent.com/ampledata/cotproxyweb/main/cotproxyweb.service
 
-(You can create ``cotproxyweb.service`` using Nano: ``$ sudo nano /etc/systemd/system/cotproxyweb.service``)
+2. Edit the COTProxyWeb service and change ``CHANGEME`` to the path to the directory where you downloaded cotproxyweb::
 
-2. Enable cotproxy systemd service::
+    $ sudo nano /etc/systemd/system/cotproxyweb.service
+
+(e.g. If you downloaded cotproxyweb to /home/pi, CHANGEME should be changed to /home/pi)
+
+3. Edit COTProxyWeb settings.py and append your systems IP address to the ALLOWED_HOSTS list (that is, add the IP of 
+the system where you're running COTProxyWeb)::
+
+    $ nano cotproxyweb/settings.py
+
+4. Enable cotproxyweb systemd service::
     
     $ sudo systemctl daemon-reload
     $ sudo systemctl enable cotproxyweb
     $ sudo systemctl start cotproxyweb
 
-4. You can view logs with: ``$ sudo journalctl -xef``
-
-
+5. You can view logs with: ``$ sudo journalctl -xef``
 
 
 Source
