@@ -39,13 +39,11 @@ Installation
 
 COTProxyWeb should be installed from source::
 
-    mkdir -p /usr/src
-    cd ~/src
-    git clone https://github.com/ampledata/cotproxyweb.git
-    cd cotproxyweb/
-    python3 -m pip install -r requirements.txt
-    python3 manage.py migrate
-    python3 manage.py createsuperuser \
+    $ git clone https://github.com/ampledata/cotproxyweb.git
+    $ cd cotproxyweb/
+    $ python3 -m pip install -r requirements.txt
+    $ python3 manage.py migrate
+    $ python3 manage.py createsuperuser \
       --username admin --email admin@example.com
 
 
