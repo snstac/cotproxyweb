@@ -4,20 +4,19 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('cpweb', '0002_alter_cptransform_options_alter_cptransform_agency'),
+        ("cpweb", "0002_alter_cptransform_options_alter_cptransform_agency"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='cotobject',
-            name='n_number',
+            model_name="cotobject",
+            name="n_number",
             field=models.CharField(blank=True, max_length=16),
         ),
         migrations.AddField(
-            model_name='cptransform',
-            name='remarks',
+            model_name="cptransform",
+            name="remarks",
             field=models.CharField(blank=True, max_length=256),
         ),
     ]
