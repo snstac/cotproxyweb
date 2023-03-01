@@ -31,13 +31,16 @@ class IconAdmin(admin.ModelAdmin):
 class IconSetAdmin(admin.ModelAdmin):
     search_fields = ["uuid", "name"]
 
+
 @admin.register(Queue)
 class QueueAdmin(admin.ModelAdmin):
     search_fields = ["name"]
 
+
 @admin.register(Route)
 class RouteAdmin(admin.ModelAdmin):
     search_fields = ["name", "source", "destination"]
+
 
 @admin.register(Video)
 class VideoAdmin(admin.ModelAdmin):

@@ -34,7 +34,16 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="Queue",
             fields=[
-                ("id", models.BigAutoField(auto_created=True, default=None, primary_key=False, serialize=False, verbose_name='ID')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        default=None,
+                        primary_key=False,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
                 ("created", models.DateTimeField(auto_now_add=True)),
                 (
                     "queue",
@@ -55,7 +64,16 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="Route",
             fields=[
-                ("id", models.BigAutoField(auto_created=True, default=None, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        default=None,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
                 ("created", models.DateTimeField(auto_now_add=True)),
                 (
                     "source",
@@ -64,7 +82,7 @@ class Migration(migrations.Migration):
                         null=True,
                         on_delete=django.db.models.deletion.DO_NOTHING,
                         to="cpweb.queue",
-                        related_name='source_routes'
+                        related_name="source_routes",
                     ),
                 ),
                 (
@@ -74,7 +92,7 @@ class Migration(migrations.Migration):
                         null=True,
                         on_delete=django.db.models.deletion.DO_NOTHING,
                         to="cpweb.queue",
-                        related_name='destination_routes'
+                        related_name="destination_routes",
                     ),
                 ),
                 ("name", models.CharField(blank=True, max_length=128)),

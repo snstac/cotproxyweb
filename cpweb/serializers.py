@@ -34,10 +34,12 @@ class IconSetSerializer(serializers.HyperlinkedModelSerializer):
         model = IconSet
         fields = ("uuid", "name")
 
+
 class QueueSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Queue
         fields = ["queue"]
+
 
 class RouteSerializer(serializers.HyperlinkedModelSerializer):
     source = serializers.SerializerMethodField()

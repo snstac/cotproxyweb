@@ -9,7 +9,7 @@ from .serializers import (
     IconSerializer,
     IconSetSerializer,
     QueueSerializer,
-    RouteSerializer
+    RouteSerializer,
 )
 
 from django.contrib.auth.models import User, Group
@@ -55,11 +55,13 @@ class IconSetList(generics.ListCreateAPIView):
     lookup_field = "uuid"
     lookup_value_regex = "[^/]+"
 
+
 class QueueList(generics.ListCreateAPIView):
     queryset = Queue.objects.all()
     serializer_class = QueueSerializer
     lookup_field = "queue"
     lookup_value_regex = "[^/]+"
+
 
 class QueueDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Queue.objects.all()
@@ -67,18 +69,21 @@ class QueueDetail(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = "queue"
     lookup_value_regex = "[^/]+"
 
+
 class RouteList(generics.ListCreateAPIView):
     queryset = Route.objects.all()
     serializer_class = RouteSerializer
     lookup_field = "source"
     lookup_value_regex = "[^/]+"
 
+
 class RouteDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Route.objects.all()
     serializer_class = RouteSerializer
     lookup_field = "source__queue"
     lookup_value_regex = "[^/]+"
-    lookup_url_kwarg = 'source'
+    lookup_url_kwarg = "source"
+
 
 class IconSetDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = IconSet.objects.all()

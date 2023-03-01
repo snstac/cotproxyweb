@@ -18,6 +18,7 @@ class COTObject(models.Model):
             _str = f"{self.uid} ({self.n_number})"
         return _str
 
+
 class Queue(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     queue = models.CharField(max_length=128, blank=True)
@@ -29,14 +30,23 @@ class Queue(models.Model):
 
     def __str__(self):
         return self.queue
-    
+
+
 class Route(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     source = models.ForeignKey(
-        Queue, on_delete=models.DO_NOTHING, null=True, blank=True, related_name='source_routes'
+        Queue,
+        on_delete=models.DO_NOTHING,
+        null=True,
+        blank=True,
+        related_name="source_routes",
     )
     destination = models.ForeignKey(
-        Queue, on_delete=models.DO_NOTHING, null=True, blank=True, related_name='destination_routes'
+        Queue,
+        on_delete=models.DO_NOTHING,
+        null=True,
+        blank=True,
+        related_name="destination_routes",
     )
     name = models.CharField(max_length=128, blank=True)
 
@@ -47,7 +57,8 @@ class Route(models.Model):
 
     def __str__(self):
         return self.name
-    
+
+
 class IconSet(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4)
