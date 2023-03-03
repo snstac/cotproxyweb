@@ -87,10 +87,8 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "destination",
-                    models.ForeignKey(
+                    models.ManyToManyField(
                         blank=True,
-                        null=True,
-                        on_delete=django.db.models.deletion.DO_NOTHING,
                         to="cpweb.queue",
                         related_name="destination_routes",
                     ),
@@ -100,7 +98,7 @@ class Migration(migrations.Migration):
             options={
                 "verbose_name": "Route",
                 "verbose_name_plural": "Routes",
-                "ordering": ["name", "source", "destination"],
+                "ordering": ["name", "source"],
             },
         ),
         migrations.CreateModel(

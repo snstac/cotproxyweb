@@ -43,13 +43,10 @@ class QueueSerializer(serializers.HyperlinkedModelSerializer):
 
 class RouteSerializer(serializers.HyperlinkedModelSerializer):
     source = serializers.SerializerMethodField()
-    destination = serializers.SerializerMethodField()
+    destination = serializers.StringRelatedField(many=True)
 
     def get_source(self, obj):
         return obj.source.queue if obj.source else None
-
-    def get_destination(self, obj):
-        return obj.destination.queue if obj.destination else None
 
     class Meta:
         model = Route

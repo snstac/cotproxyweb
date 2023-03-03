@@ -41,17 +41,15 @@ class Route(models.Model):
         blank=True,
         related_name="source_routes",
     )
-    destination = models.ForeignKey(
+    destination = models.ManyToManyField(
         Queue,
-        on_delete=models.DO_NOTHING,
-        null=True,
-        blank=True,
         related_name="destination_routes",
+        blank=True,
     )
     name = models.CharField(max_length=128, blank=True)
 
     class Meta:
-        ordering = ["name", "source", "destination"]
+        ordering = ["name", "source"]
         verbose_name = "Route"
         verbose_name_plural = "Routes"
 
