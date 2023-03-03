@@ -6,75 +6,191 @@ import uuid
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='COTObject',
+            name="COTObject",
             fields=[
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('uid', models.CharField(default=uuid.uuid4, max_length=128, primary_key=True, serialize=False)),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                (
+                    "uid",
+                    models.CharField(
+                        default=uuid.uuid4,
+                        max_length=128,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'COT Object',
-                'verbose_name_plural': 'COT Objects',
-                'ordering': ['uid'],
+                "verbose_name": "COT Object",
+                "verbose_name_plural": "COT Objects",
+                "ordering": ["uid"],
             },
         ),
         migrations.CreateModel(
-            name='IconSet',
+            name="Queue",
             fields=[
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('uuid', models.UUIDField(default=uuid.uuid4, primary_key=True, serialize=False)),
-                ('defaultGroup', models.CharField(blank=True, max_length=128)),
-                ('skipResize', models.BooleanField(default=False)),
-                ('version', models.CharField(blank=True, max_length=16)),
-                ('name', models.CharField(blank=True, max_length=128)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        default=None,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                (
+                    "queue",
+                    models.CharField(
+                        default=None,
+                        max_length=128,
+                        primary_key=False,
+                        serialize=False,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Icon Set',
-                'verbose_name_plural': 'Icon Sets',
-                'ordering': ['name', 'defaultGroup', 'uuid'],
+                "verbose_name": "Queue",
+                "verbose_name_plural": "Queues",
+                "ordering": ["queue"],
             },
         ),
         migrations.CreateModel(
-            name='Icon',
+            name="Route",
             fields=[
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('name', models.CharField(max_length=128, primary_key=True, serialize=False)),
-                ('type2525b', models.CharField(blank=True, max_length=32)),
-                ('iconset', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='cpweb.iconset')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        default=None,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                (
+                    "source",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.DO_NOTHING,
+                        to="cpweb.queue",
+                        related_name="source_routes",
+                    ),
+                ),
+                (
+                    "destination",
+                    models.ManyToManyField(
+                        blank=True,
+                        to="cpweb.queue",
+                        related_name="destination_routes",
+                    ),
+                ),
+                ("name", models.CharField(blank=True, max_length=128)),
             ],
             options={
-                'verbose_name': 'Icon',
-                'verbose_name_plural': 'Icons',
-                'ordering': ['name', 'type2525b'],
+                "verbose_name": "Route",
+                "verbose_name_plural": "Routes",
+                "ordering": ["name", "source"],
             },
         ),
         migrations.CreateModel(
-            name='CPTransform',
+            name="IconSet",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('callsign', models.CharField(blank=True, max_length=32)),
-                ('cot_type', models.CharField(blank=True, max_length=32)),
-                ('active', models.BooleanField(default=False)),
-                ('domain', models.CharField(blank=True, max_length=32)),
-                ('agency', models.CharField(blank=True, max_length=32)),
-                ('reg', models.CharField(blank=True, max_length=32)),
-                ('model', models.CharField(blank=True, max_length=32)),
-                ('hex', models.CharField(blank=True, max_length=32)),
-                ('cot_uid', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='cpweb.cotobject')),
-                ('icon', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='cpweb.icon')),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                (
+                    "uuid",
+                    models.UUIDField(
+                        default=uuid.uuid4, primary_key=True, serialize=False
+                    ),
+                ),
+                ("defaultGroup", models.CharField(blank=True, max_length=128)),
+                ("skipResize", models.BooleanField(default=False)),
+                ("version", models.CharField(blank=True, max_length=16)),
+                ("name", models.CharField(blank=True, max_length=128)),
             ],
             options={
-                'verbose_name': 'Transform',
-                'verbose_name_plural': 'Transforms',
-                'ordering': ['callsign'],
+                "verbose_name": "Icon Set",
+                "verbose_name_plural": "Icon Sets",
+                "ordering": ["name", "defaultGroup", "uuid"],
+            },
+        ),
+        migrations.CreateModel(
+            name="Icon",
+            fields=[
+                ("created", models.DateTimeField(auto_now_add=True)),
+                (
+                    "name",
+                    models.CharField(max_length=128, primary_key=True, serialize=False),
+                ),
+                ("type2525b", models.CharField(blank=True, max_length=32)),
+                (
+                    "iconset",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.DO_NOTHING,
+                        to="cpweb.iconset",
+                    ),
+                ),
+            ],
+            options={
+                "verbose_name": "Icon",
+                "verbose_name_plural": "Icons",
+                "ordering": ["name", "type2525b"],
+            },
+        ),
+        migrations.CreateModel(
+            name="CPTransform",
+            fields=[
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("callsign", models.CharField(blank=True, max_length=32)),
+                ("cot_type", models.CharField(blank=True, max_length=32)),
+                ("active", models.BooleanField(default=False)),
+                ("domain", models.CharField(blank=True, max_length=32)),
+                ("agency", models.CharField(blank=True, max_length=32)),
+                ("reg", models.CharField(blank=True, max_length=32)),
+                ("model", models.CharField(blank=True, max_length=32)),
+                ("hex", models.CharField(blank=True, max_length=32)),
+                (
+                    "cot_uid",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.DO_NOTHING,
+                        to="cpweb.cotobject",
+                    ),
+                ),
+                (
+                    "icon",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.DO_NOTHING,
+                        to="cpweb.icon",
+                    ),
+                ),
+            ],
+            options={
+                "verbose_name": "Transform",
+                "verbose_name_plural": "Transforms",
+                "ordering": ["callsign"],
             },
         ),
     ]

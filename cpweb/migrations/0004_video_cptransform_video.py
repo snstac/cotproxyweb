@@ -6,29 +6,38 @@ import uuid
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('cpweb', '0003_cotobject_n_number_cptransform_remarks'),
+        ("cpweb", "0003_cotobject_n_number_cptransform_remarks"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Video',
+            name="Video",
             fields=[
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('uuid', models.UUIDField(default=uuid.uuid4, primary_key=True, serialize=False)),
-                ('description', models.CharField(blank=True, max_length=32)),
-                ('url', models.CharField(blank=True, max_length=256)),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                (
+                    "uuid",
+                    models.UUIDField(
+                        default=uuid.uuid4, primary_key=True, serialize=False
+                    ),
+                ),
+                ("description", models.CharField(blank=True, max_length=32)),
+                ("url", models.CharField(blank=True, max_length=256)),
             ],
             options={
-                'verbose_name': 'Video Link',
-                'verbose_name_plural': 'Video Links',
-                'ordering': ['description'],
+                "verbose_name": "Video Link",
+                "verbose_name_plural": "Video Links",
+                "ordering": ["description"],
             },
         ),
         migrations.AddField(
-            model_name='cptransform',
-            name='video',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='cpweb.video'),
+            model_name="cptransform",
+            name="video",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                to="cpweb.video",
+            ),
         ),
     ]

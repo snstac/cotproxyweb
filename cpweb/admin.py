@@ -7,52 +7,63 @@ from django.utils.html import format_html
 
 # Register your models here.
 
-from .models import CPTransform, COTObject, Icon, IconSet, Video
+from .models import CPTransform, COTObject, Icon, IconSet, Video, Queue, Route
 
 
-admin.site.site_header = 'COT Proxy Web'
-admin.site.index_title = 'Sensors & Signals'
+admin.site.site_header = "COT Proxy Web"
+admin.site.index_title = "Sensors & Signals"
 
 
 @admin.register(COTObject)
 class COTObjectAdmin(admin.ModelAdmin):
-    search_fields = ['uid', 'n_number']
+    search_fields = ["uid", "n_number"]
     # list_display = ['uid', 'n_number']
     list_filter = ()
     list_per_page = 20
 
+
 @admin.register(Icon)
 class IconAdmin(admin.ModelAdmin):
-    search_fields = ['name', 'type2525b']
+    search_fields = ["name", "type2525b"]
 
 
 @admin.register(IconSet)
 class IconSetAdmin(admin.ModelAdmin):
-    search_fields = ['uuid', 'name']
+    search_fields = ["uuid", "name"]
+
+
+@admin.register(Queue)
+class QueueAdmin(admin.ModelAdmin):
+    search_fields = ["name"]
+
+
+@admin.register(Route)
+class RouteAdmin(admin.ModelAdmin):
+    search_fields = ["name", "source", "destination"]
 
 
 @admin.register(Video)
 class VideoAdmin(admin.ModelAdmin):
-    search_fields = ['description']
+    search_fields = ["description"]
 
 
 @admin.register(CPTransform)
 class CPTransformAdmin(admin.ModelAdmin):
-    search_fields = ['callsign', 'cot_uid__uid']
-    autocomplete_fields = ['cot_uid']
-    list_display = ['show_callsign', 'view_cot_uid']
+    search_fields = ["callsign", "cot_uid__uid"]
+    autocomplete_fields = ["cot_uid"]
+    list_display = ["show_callsign", "view_cot_uid"]
     # list_filter = ('cot_uid__uid',)
     list_filter = ()
     list_per_page = 20
 
-    @admin.display(empty_value="-None-", description='Callsign')
+    @admin.display(empty_value="-None-", description="Callsign")
     def show_callsign(self, obj):
-         return obj.callsign or "-None-"
-    
+        return obj.callsign or "-None-"
+
     def view_cot_uid(self, obj):
         url = (
-            reverse('admin:cpweb_cotobject_changelist')
-            + '?'
+            reverse("admin:cpweb_cotobject_changelist")
+            + "?"
             + urlencode({"uid": f"{obj.cot_uid}"})
         )
         return format_html('<a href="{}">{}</a>', url, obj.cot_uid)

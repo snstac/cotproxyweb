@@ -1,31 +1,63 @@
 from rest_framework import serializers
-from .models import COTObject, CPTransform, Icon, IconSet
+from .models import COTObject, CPTransform, Icon, IconSet, Queue, Route
 
 
 class COTObjectSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = COTObject
-        fields = ('uid', 'n_number')
+        fields = ("uid", "n_number")
 
 
 class CPTransformSerializer(serializers.ModelSerializer):
-    cot_uid = serializers.PrimaryKeyRelatedField(allow_null=True, queryset=COTObject.objects.all(), required=False)
+    cot_uid = serializers.PrimaryKeyRelatedField(
+        allow_null=True, queryset=COTObject.objects.all(), required=False
+    )
 
     class Meta:
         model = CPTransform
-        fields = ('callsign', 'cot_uid', 'cot_type', 'icon', 'active', 'domain', 'agency', 'reg', 'model', 'hex')
-
+        fields = (
+            "callsign",
+            "cot_uid",
+            "cot_type",
+            "icon",
+            "active",
+            "domain",
+            "agency",
+            "reg",
+            "model",
+            "hex",
+        )
 
 
 class IconSetSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = IconSet
-        fields = ('uuid', 'name')
-        
+        fields = ("uuid", "name")
+
+
+class QueueSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Queue
+        fields = ["queue"]
+
+
+class RouteSerializer(serializers.HyperlinkedModelSerializer):
+    source = serializers.SerializerMethodField()
+    destination = serializers.StringRelatedField(many=True)
+
+    def get_source(self, obj):
+        return obj.source.queue if obj.source else None
+
+    class Meta:
+        model = Route
+        fields = ("name", "source", "destination")
+
 
 class IconSerializer(serializers.HyperlinkedModelSerializer):
-    iconset = serializers.PrimaryKeyRelatedField(allow_null=True, queryset=IconSet.objects.all(), required=False)
+    iconset = serializers.PrimaryKeyRelatedField(
+        allow_null=True, queryset=IconSet.objects.all(), required=False
+    )
+
     class Meta:
         model = Icon
-        fields = ('name', 'iconset')
-
+        fields = ("name", "iconset")
