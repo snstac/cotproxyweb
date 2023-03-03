@@ -84,7 +84,7 @@ class RouteDetail(generics.RetrieveUpdateDestroyAPIView):
     lookup_url_kwarg = "source"
 
     def get_queryset(self):
-        queryset = Route.objects.filter(source__queue=self.kwargs['source'])
+        queryset = Route.objects.filter(source__queue=self.kwargs["source"])
         return queryset
 
     def get_object(self):
