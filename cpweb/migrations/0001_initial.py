@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
                     models.BigAutoField(
                         auto_created=True,
                         default=None,
-                        primary_key=False,
+                        primary_key=True,
                         serialize=False,
                         verbose_name="ID",
                     ),
@@ -50,7 +50,7 @@ class Migration(migrations.Migration):
                     models.CharField(
                         default=None,
                         max_length=128,
-                        primary_key=True,
+                        primary_key=False,
                         serialize=False,
                     ),
                 ),

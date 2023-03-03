@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from rest_framework import generics, mixins, viewsets, permissions
 
 from .models import COTObject, CPTransform, IconSet, Icon, Queue, Route
@@ -78,11 +78,21 @@ class RouteList(generics.ListCreateAPIView):
 
 
 class RouteDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Route.objects.all()
     serializer_class = RouteSerializer
     lookup_field = "source__queue"
     lookup_value_regex = "[^/]+"
     lookup_url_kwarg = "source"
+
+    def get_queryset(self):
+        queryset = Route.objects.filter(source__queue=self.kwargs['source'])
+        return queryset
+
+    def get_object(self):
+        queryset = self.filter_queryset(self.get_queryset())
+        obj = queryset.first()
+        if obj is None:
+            raise Http404("No Route matches the given query.")
+        return obj
 
 
 class IconSetDetail(generics.RetrieveUpdateDestroyAPIView):
